@@ -1,0 +1,25 @@
+class Solution:
+    def maximumDetonation(self, bombs: List[List[int]]) -> int:
+
+      d=defaultdict(list)
+      for i in range(len(bombs)):
+        for j in range(len(bombs)):
+          if i==j:continue
+          if (bombs[i][0]-bombs[j][0])**2 + (bombs[i][1]-bombs[j][1])**2<=bombs[i][2]**2:
+            d[i]+=[j]
+      
+      def dfs(i,visited):
+        for j in d[i]:
+          if j not in visited:
+            visited.add(j)
+            dfs(j,visited)
+
+      ans=0
+      for i in range(len(bombs)):
+        visited=set()
+        visited.add(i)
+        dfs(i,visited)
+        ans=max(ans,len(visited))
+      return ans 
+
+      
