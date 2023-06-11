@@ -1,0 +1,17 @@
+class Solution:
+    def smallestString(self, s: str) -> str:
+      i=0
+      if s[i]=='a':
+        while i<len(s) and s[i]=='a':
+          i+=1
+      if i==len(s):
+        return s[:len(s)-1]+"z"
+      st=i
+      while i<len(s) and s[i]!='a':
+        i+=1
+      en=i
+      ns=s[:st]
+      for k in range(st,en):
+        ns+=chr(ord(s[k])-1)
+      ns+=s[en:]
+      return ns
