@@ -1,0 +1,16 @@
+class Solution:
+  def equalPairs(self, grid: List[List[int]]) -> int:
+    result = 0
+    rows = {}
+    for r in grid:
+        key = ','.join(map(str, r))
+        rows[key] = rows.get(key, 0) + 1
+
+    # columns = {}
+    n = len(grid)
+    for j in range(n):
+        key = ','.join([str(grid[i][j]) for i in range(n)])
+        result += rows.get(key, 0)
+
+    return result
+    
