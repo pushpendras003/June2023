@@ -1,0 +1,17 @@
+class Solution:
+    def minCost(self, nums: List[int], cost: List[int]) -> int:
+
+      def helper(n):
+        return sum(abs(a-n)*c for a,c in zip(nums,cost))
+
+      l,r=min(nums),max(nums)
+      ans=helper(l)
+      while l<r:
+        n=(l+r)//2
+        v1,v2=helper(n),helper(n+1)
+        ans=min(v1,v2)
+        if v1<v2:
+          r=n
+        else:
+          l=n+1
+      return ans 
