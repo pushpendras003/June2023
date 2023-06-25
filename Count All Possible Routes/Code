@@ -1,0 +1,19 @@
+class Solution:
+    def countRoutes(self, locations: List[int], start: int, finish: int, fuel: int) -> int:
+      mod=10**9+7
+      def dfs(start,fuel,finish):
+        if start==finish and fuel==0:return 1
+        if fuel<=0:
+          return 0
+        if dp[start][fuel]!=-1:return dp[start][fuel]
+        ans=0
+        if start==finish:ans+=1
+        for i in range(len(locations)):
+          if i==start:continue
+          t=abs(locations[i]-locations[start])
+          ans+=dfs(i,fuel-t,finish)
+        dp[start][fuel]=ans%mod
+        return dp[start][fuel]
+      dp=[[-1 for _ in range(fuel+1)] for _ in range(len(locations))]
+      return dfs(start,fuel,finish)
+        
